@@ -6,10 +6,10 @@ import {Route, Switch} from 'react-router-dom';
 import Home from './pages/HomePage'
 import About from './pages/AboutPage'
 import Contact from './pages/ContactPage'
-import Products from './pages/ProguctsPage'
+import Products from './pages/ProductsPage'
 import SingleProduct from './pages/SingleProductPage'
 import Cart from './pages/CartPage'
-import Defaullt from './pages/Default'
+import Default from './pages/DefaultPage'
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
     <Route path="/products" exact component={Products} />
     <Route path="/products/:id" component={SingleProduct} />
     <Route path="/cart" component={Cart} />
-    <Route path="/default" component={Defaullt} />
+    <Route path="/default" component={Default} />
   </Switch>
   );
 }
