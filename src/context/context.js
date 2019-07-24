@@ -6,7 +6,8 @@ class ProductProvider extends React.Component {
 
     state = {
         sidebarOpen: false,
-        cartOpen: false
+        cartOpen: false,
+        cartItems: 11
     };
 
     handleSidebar = () => {
