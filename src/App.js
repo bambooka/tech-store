@@ -33,7 +33,7 @@ function App() {
                 <Route path="/cart" component={Cart}/>
                 <Route path="/default" component={Default}/>
             </Switch>
-                <Footer />?
+                <Footer />
         </>
     );
 }
