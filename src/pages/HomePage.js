@@ -4,7 +4,10 @@ import {ProductConsumer} from "../context";
 export default function HomePage() {
     return (
         <ProductConsumer>
-            {value =>  <h1>{value}</h1>}
+            {value => {
+                console.log(value);
+                return <h1> hello from home page</h1>
+            }}
         </ProductConsumer>
     )
 }
