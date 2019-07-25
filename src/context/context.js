@@ -9,7 +9,8 @@ class ProductProvider extends React.Component {
         sidebarOpen: false,
         cartOpen: false,
         cartItems: 11,
-        links: linkData
+        links: linkData,
+        cart: []
     };
 
     handleSidebar = () => {
@@ -20,7 +21,7 @@ class ProductProvider extends React.Component {
 
     handleCart = () => {
         this.setState({
-            cartOpen: !this.state.sidebarOpen
+            cartOpen: !this.state.cartOpen
         })
     };
 
