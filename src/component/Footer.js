@@ -1,7 +1,48 @@
 import React from 'react';
+import socialData from '../context/socialData';
+import styled from 'styled-components';
+
+import {ProductConsumer} from "../context";
 
 export default function Footer(){
     return (
-        <h1> hello from footer</h1>
+        <ProductConsumer>
+            {value => {
+                return <FooterWrapper>
+                    <div className='container'>
+                        <div className="row">
+                            <div className='col-md-6 d-flex align-items-center'>
+                                <p className="text-capitalize">
+                                    copyright &copy; tech store {new Date().getFullYear()} all right reserved
+                                </p>
+                            </div>
+                            <div className="col-md-6 d-flex justify-content-around align-items-center">
+                                {value.socialIcons.map(item => <a href={item.url} key={item.id}>{item.icon}</a> )}
+                            </div>
+                        </div>
+                    </div>
+                </FooterWrapper>
+            }}
+        </ProductConsumer>
     )
 }
+
+const FooterWrapper = styled.footer`
+    padding: 1rem;
+    background: var(--darkGrey);
+    color: var(--mainWhite);
+    .icon {
+        font-size: 1.5rem;
+        color: var(--mainWhite);
+        transition: var(--mainTransition);
+    }
+    
+    .icon:hover {
+        color: var(--primaryColor);
+        cursor: pointer;
+    }
+    
+    p{
+        margin: 0;
+    }
+`;
