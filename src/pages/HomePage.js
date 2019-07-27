@@ -2,6 +2,10 @@ import React from 'react';
 import Hero from '../component/Hero.js'
 import {Link} from 'react-router-dom'
 
+import Services from '../component/HomePage/Services'
+import Featured from '../component/HomePage/Featured'
+import Sidecart from "../component/Sidecart";
+
 export default function HomePage() {
     return (
         <>
@@ -10,6 +14,8 @@ export default function HomePage() {
                     our products
                 </Link>
             </Hero>
+            <Services />
+            <Featured/>
         </>
     )
 }
