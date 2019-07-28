@@ -2,6 +2,7 @@ import React from 'react';
 import {linkData} from "./linkData";
 import {socialData} from "./socialData";
 import {items} from './productData'
+
 const ProductContext = React.createContext();
 
 class ProductProvider extends React.Component {
@@ -21,6 +22,53 @@ class ProductProvider extends React.Component {
         featuredProducts: [],
         singleProduct: {},
         loading: true
+    };
+
+    componentDidMount() {
+
+        this.setProducts(items)
+    }
+
+    setProducts = (products) => {
+        let storeProducts = products.map(item => {
+                const {id} = item.sys;
+                const product = {id, ...item.fields};
+                return product;
+            });
+        console.log(storeProducts);
+
+        let featuredProducts = storeProducts.filter(item =>
+            item.featured === true)
+
+        this.setState({
+            storeProducts,
+            filteredProducts: storeProducts,
+            featuredProducts,
+            cart: this.getStorageCart(),
+            singleProduct: this.getStorageProduct(),
+            loading: false
+        })
+    };
+
+    getStorageCart = () => {
+        return [];
+    };
+
+    getStorageProduct = () => {
+        return [];
+    };
+
+    getTotals = () => {};
+
+    addTotals =() => {};
+
+    sybcStorage = () => {};
+
+    addToCart = (id) => {
+        console.log(`add to cart ${id}`)
+    };
+    getSingleProduct = (id) => {
+        console.log(`get single product ${id}`)
     };
 
     handleSidebar = () => {
@@ -47,7 +95,7 @@ class ProductProvider extends React.Component {
         })
     };
 
-    render(){
+    render() {
         return (
             <ProductContext.Provider value={{
                 ...this.state,
@@ -55,6 +103,7 @@ class ProductProvider extends React.Component {
                 handleCart: this.handleCart,
                 openCart: this.openCart,
                 closeCart: this.closeCart,
+                addToCart: this.addToCart
 
             }}>
                 {this.props.children}
