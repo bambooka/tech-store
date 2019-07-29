@@ -72,6 +72,10 @@ class ProductProvider extends React.Component {
         console.log(`get single product ${id}`)
     };
 
+    setSingleProduct = (id) => {
+        console.log(`set single product ${id}`)
+    };
+
     handleSidebar = () => {
         this.setState({
             sidebarOpen: !this.state.sidebarOpen

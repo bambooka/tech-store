@@ -18,6 +18,13 @@ export default function Featured () {
                             ))
                         }}
                     </ProductConsumer>
+                    <div className="row mt-5">
+                        <div className="col text-center">
+                            <Link to="/products" className="main-link">
+                                our products
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
