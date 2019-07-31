@@ -63,11 +63,35 @@ class ProductProvider extends React.Component {
 
     addTotals =() => {};
 
-    sybcStorage = () => {};
+    syncStorage = () => {};
 
     addToCart = (id) => {
-        console.log(`add to cart ${id}`)
+        let tempCart = [...this.state.cart];
+        let tempProducts = [...this.state.storeProducts];
+        let tempItem = tempCart.find(item => item.id === id);
+
+        if(!tempItem){
+            tempItem = tempProducts.find(item => item.id === id);
+            let total = tempItem.price;
+            let cartItem = {...tempItem, count: 1, total};
+            tempCart = [...tempCart,cartItem];
+        } else {
+            tempItem.count++;
+            tempItem.total = tempItem.count * tempItem.price;
+            tempItem.total = parseFloat(tempItem.total.toFixed(2))
+        }
+
+        this.setState(() => {
+            return {cart: tempCart}
+        }, () => {
+            this.addTotals();
+            this.syncStorage();
+            this.openCart();
+        });
+
+        console.log(tempCart, tempProducts )
     };
+
     getSingleProduct = (id) => {
         console.log(`get single product ${id}`)
     };
@@ -96,7 +120,7 @@ class ProductProvider extends React.Component {
 
     openCart = () => {
         this.setState({
-            cartOpen: false
+            cartOpen: true
         })
     };
 
