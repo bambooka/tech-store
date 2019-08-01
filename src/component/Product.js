@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {FaSearch, FaCartPlus} from "react-icons/fa";
 import {ProductConsumer} from "../context";
 
-export default function Product({product}){
+export default function Product({product}) {
     return <ProductConsumer>
         {value => {
             const {addToCart, setSingleProduct} = value;
@@ -19,19 +19,18 @@ export default function Product({product}){
                                 // style={{height: '300px'}}
                             />
                             <div className="product-icons">
-                            <Link
-                                to={`/products/${product.id}`}
-                                onClick={() => setSingleProduct(product.id)}
-                            >
-                                <FaSearch className="icon"/>
-                            </Link>
+                                <Link
+                                    to={`/products/${product.id}`}
+                                    onClick={() => setSingleProduct(product.id)}
+                                >
+                                    <FaSearch className="icon"/>
+                                </Link>
 
-                            <Link
-                                onClick={() => addToCart(product.id)}
-                            >
-                                <FaCartPlus className="icon"/>
-                            </Link>
-                        </div>
+                                <FaCartPlus onClick={() => addToCart(product.id)}
+                                            className="icon"
+                                />
+
+                            </div>
                         </div>
                         <div className="card-body d-flex justify-content-between">
                             <p className="mb-0">{product.title}</p>

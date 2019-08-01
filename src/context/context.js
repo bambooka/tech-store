@@ -31,15 +31,15 @@ class ProductProvider extends React.Component {
 
     setProducts = (products) => {
         let storeProducts = products.map(item => {
-                const {id} = item.sys;
-                const image = item.fields.image.fields.file.url;
-                const product = {id, ...item.fields, image};
-                return product;
-            });
+            const {id} = item.sys;
+            const image = item.fields.image.fields.file.url;
+            const product = {id, ...item.fields, image};
+            return product;
+        });
         console.log(storeProducts);
 
         let featuredProducts = storeProducts.filter(item =>
-            item.featured === true)
+            item.featured === true);
 
         this.setState({
             storeProducts,
@@ -55,7 +55,7 @@ class ProductProvider extends React.Component {
 
     getStorageCart = () => {
         let cart;
-        if (localStorage.getItem('cart')){
+        if (localStorage.getItem('cart')) {
             cart = JSON.parse(localStorage.getItem('cart'));
         } else {
             cart = [];
@@ -64,7 +64,9 @@ class ProductProvider extends React.Component {
     };
 
     getStorageProduct = () => {
-        return [];
+        return localStorage.getItem('singleProduct')
+            ? JSON.parse(localStorage.getItem('singleProduct'))
+            : {}
     };
 
     getTotals = () => {
@@ -75,7 +77,7 @@ class ProductProvider extends React.Component {
                 subTotal += item.total;
                 cartItems += item.count;
             }
-        )
+        );
 
         subTotal = parseFloat(subTotal.toFixed(2));
         let tax = subTotal * 0.13;
@@ -91,13 +93,13 @@ class ProductProvider extends React.Component {
     };
 
     addTotals = () => {
-const totals = this.getTotals();
-this.setState({
-    cartItems: totals.cartItems,
-    cartTotal: totals.total,
-    cartSubTotal: totals.subTotal,
-    cartTax: totals.tax
-})
+        const totals = this.getTotals();
+        this.setState({
+            cartItems: totals.cartItems,
+            cartTotal: totals.total,
+            cartSubTotal: totals.subTotal,
+            cartTax: totals.tax
+        })
     };
 
     syncStorage = () => {
@@ -109,11 +111,11 @@ this.setState({
         let tempProducts = [...this.state.storeProducts];
         let tempItem = tempCart.find(item => item.id === id);
 
-        if(!tempItem){
+        if (!tempItem) {
             tempItem = tempProducts.find(item => item.id === id);
             let total = tempItem.price;
             let cartItem = {...tempItem, count: 1, total};
-            tempCart = [...tempCart,cartItem];
+            tempCart = [...tempCart, cartItem];
         } else {
             tempItem.count++;
             tempItem.total = tempItem.count * tempItem.price;
@@ -128,15 +130,20 @@ this.setState({
             this.openCart();
         });
 
-        console.log(tempCart, tempProducts )
+        console.log(tempCart, tempProducts)
     };
 
     getSingleProduct = (id) => {
         console.log(`get single product ${id}`)
     };
 
-    setSingleProduct = (id) => {
-        console.log(`set single product ${id}`)
+    setSingleProduct = id => {
+        let product = this.state.storeProducts.find(item => item.id === id);
+        localStorage.setItem('singleProducts', JSON.stringify(product));
+        this.setState({
+            singleProduct: {...product},
+            loading: false
+        })
     };
 
     handleSidebar = () => {
@@ -171,7 +178,8 @@ this.setState({
                 handleCart: this.handleCart,
                 openCart: this.openCart,
                 closeCart: this.closeCart,
-                addToCart: this.addToCart
+                addToCart: this.addToCart,
+                setSingleProduct: this.setSingleProduct
 
             }}>
                 {this.props.children}
