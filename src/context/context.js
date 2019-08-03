@@ -9,7 +9,7 @@ class ProductProvider extends React.Component {
 
     state = {
         sidebarOpen: false,
-        cartOpen: true,
+        cartOpen: false,
         cartItems: 11,
         links: linkData,
         socialIcons: socialData,
@@ -170,6 +170,22 @@ class ProductProvider extends React.Component {
         })
     };
 
+    increment = (id) => {
+        console.log(id)
+    };
+
+    decrement = (id) => {
+        console.log(id)
+    };
+
+    removeItem = (id) => {
+        console.log(id)
+    };
+
+    clearCart = () => {
+        console.log('cart is cleaned')
+    };
+
     render() {
         return (
             <ProductContext.Provider value={{
@@ -179,7 +195,11 @@ class ProductProvider extends React.Component {
                 openCart: this.openCart,
                 closeCart: this.closeCart,
                 addToCart: this.addToCart,
-                setSingleProduct: this.setSingleProduct
+                setSingleProduct: this.setSingleProduct,
+                increment: this.increment,
+                decrement: this.decrement,
+                removeItem: this.removeItem,
+                clearCart: this.clearCart
 
             }}>
                 {this.props.children}
