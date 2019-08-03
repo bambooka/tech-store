@@ -9,7 +9,7 @@ class ProductProvider extends React.Component {
 
     state = {
         sidebarOpen: false,
-        cartOpen: false,
+        cartOpen: true,
         cartItems: 11,
         links: linkData,
         socialIcons: socialData,
