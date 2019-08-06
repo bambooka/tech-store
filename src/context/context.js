@@ -191,7 +191,16 @@ class ProductProvider extends React.Component {
     };
 
     removeItem = (id) => {
-        console.log(id)
+        let tempCart = [...this.state.cart];
+        tempCart = tempCart.filter(item => item.id !== id);
+        this.setState(() => {
+            return {
+                cart: [...tempCart]
+            }
+        }, () => {
+            this.addTotals();
+            this.syncStorage();
+        })
     };
 
     clearCart = () => {
