@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 
 import Services from '../component/HomePage/Services'
 import Featured from '../component/HomePage/Featured'
-import Sidecart from "../component/Sidecart";
 
 export default function HomePage() {
     return (

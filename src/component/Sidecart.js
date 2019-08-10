@@ -7,7 +7,7 @@ export default function Sidecart() {
     return (
         <ProductConsumer>
             {value => {
-                const {cartOpen, handleCart, closeCart, cart, cartTotal} = value;
+                const {cartOpen, handleCart, cart, cartTotal} = value;
                 return (
                     <CartWrapper show={cartOpen} onClick={handleCart}>
                         <ul>

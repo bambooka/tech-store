@@ -36,7 +36,6 @@ class ProductProvider extends React.Component {
             const product = {id, ...item.fields, image};
             return product;
         });
-        console.log(storeProducts);
 
         let featuredProducts = storeProducts.filter(item =>
             item.featured === true);
@@ -230,6 +229,17 @@ class ProductProvider extends React.Component {
             this.syncStorage();
         })
     };
+    handleChange = event => {
+        let name = event.target.name;
+        let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        this.setState({
+            [name]: value
+        }, this.sortData)
+    };
+
+    sortData = () => {
+        console.log('sorting data....')
+    }
 
     render() {
         return (
@@ -237,6 +247,7 @@ class ProductProvider extends React.Component {
                 ...this.state,
                 handleSidebar: this.handleSidebar,
                 handleCart: this.handleCart,
+                handleChange: this.handleChange,
                 openCart: this.openCart,
                 closeCart: this.closeCart,
                 addToCart: this.addToCart,
@@ -244,7 +255,8 @@ class ProductProvider extends React.Component {
                 increment: this.increment,
                 decrement: this.decrement,
                 removeItem: this.removeItem,
-                clearCart: this.clearCart
+                clearCart: this.clearCart,
+                sortData: this.sortData
 
             }}>
                 {this.props.children}

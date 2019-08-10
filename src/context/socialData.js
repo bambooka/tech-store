@@ -13,7 +13,7 @@ export const socialData = [
         url: 'https://twitter.com'
     },
     {
-        id: 1,
+        id: 3,
         icon: <FaLinkedin className="icon" />,
         url: 'https://linkedin.com'
     },

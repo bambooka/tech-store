@@ -1,5 +1,4 @@
 import React from 'react';
-import socialData from '../context/socialData';
 import styled from 'styled-components';
 
 import {ProductConsumer} from "../context";

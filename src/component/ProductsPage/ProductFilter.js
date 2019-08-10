@@ -57,7 +57,7 @@ export default function ProductFilter() {
                                                     {company}
                                                 </option>
                                             })
-                                        }
+                                        }e
                                     </select>
                                 </div>
                                 <div>
