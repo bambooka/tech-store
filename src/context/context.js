@@ -1,7 +1,8 @@
 import React from 'react';
 import {linkData} from "./linkData";
 import {socialData} from "./socialData";
-import {items} from './productData'
+// import {items} from './productData';
+import {client} from './contentful'
 
 const ProductContext = React.createContext();
 
@@ -21,12 +22,15 @@ class ProductProvider extends React.Component {
         filteredProducts: [],
         featuredProducts: [],
         singleProduct: {},
-        loading: true
+        loading: true,
+        min: 0,
+        max: 120
     };
 
     componentDidMount() {
 
-        this.setProducts(items)
+        // this.setProducts(items)
+        client.getEntries({content_type: "techStoreProject"}).then(response => this.setProducts(response.items)).catch(console.error);
     }
 
     setProducts = (products) => {
@@ -238,8 +242,38 @@ class ProductProvider extends React.Component {
     };
 
     sortData = () => {
-        console.log('sorting data....')
-    }
+        const {storeProducts, price, company, shipping, search} = this.state
+
+        let tempPrice = parseInt(price);
+
+        let tempProduct = [...storeProducts];
+
+        tempProduct = tempProduct.filter(item => item.price <= tempPrice);
+
+        if(shipping) {
+            tempProduct = tempProduct.filter(item => item.freeShipping === true)
+        }
+
+        if(search.length > 0){
+            tempProduct = tempProduct.filter(item => {
+                let tempSearch = search.toLowerCase();
+                let tempTitle = item.title.toLowerCase().slice(0, search.length);
+                if(tempSearch === tempTitle){
+                    return item;
+                }
+            })
+        }
+
+        if (company !== 'all') {
+            tempProduct = tempProduct.filter(item => item.company === company);
+        }
+
+
+        this.setState({
+            filteredProducts: tempProduct
+        })
+
+    };
 
     render() {
         return (
