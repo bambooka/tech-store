@@ -13,7 +13,7 @@ export default function Product({product}) {
                     <div className="card">
                         <div className="img-container">
                             <img
-                                className="card-img-top p-5"
+                                className="card-img-top p-5 img-fluid"
                                 src={product.image}
                                 alt="product"
                                 // style={{height: '300px'}}

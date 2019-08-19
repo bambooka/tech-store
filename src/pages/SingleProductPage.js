@@ -24,9 +24,9 @@ export default function SingleProductPage() {
                             <div className="row">
                                 <div className="col-10 mx-auto col-md-5 col-sm-8 my-3">
                                     <img
-                                        src={`../${image}`}
+                                        src={image}
                                         alt="single product"
-                                        className="image-fluid"/>
+                                        className="img-fluid"/>
                                 </div>
                                 <div className="col-10 mx-auto col-md-5 col-sm-8 my-3">
                                     <h5 className="text-title mb-4">Model: {title}</h5>
