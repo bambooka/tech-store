@@ -236,19 +236,23 @@ class ProductProvider extends React.Component {
     handleChange = event => {
         let name = event.target.name;
         let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        console.log(event.target.name, name, value);
         this.setState({
             [name]: value
         }, this.sortData)
     };
 
     sortData = () => {
-        const {storeProducts, price, company, shipping, search} = this.state
+        const {storeProducts, price, company, shipping, search} = this.state;
 
         let tempPrice = parseInt(price);
 
         let tempProduct = [...storeProducts];
 
+        console.log(tempProduct);
+
         tempProduct = tempProduct.filter(item => item.price <= tempPrice);
+
 
         if(shipping) {
             tempProduct = tempProduct.filter(item => item.freeShipping === true)
